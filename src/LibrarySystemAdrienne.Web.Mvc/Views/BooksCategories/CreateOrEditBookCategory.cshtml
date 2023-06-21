@@ -1,0 +1,54 @@
+﻿@*
+    For Book Category > Create or Edit
+*@
+
+@using LibrarySystemAdrienne.Web.Models.BookCategories
+@using LibrarySystemAdrienne.Web.Controllers
+@using LibrarySystemAdrienne.Web.Startup
+
+@model CreateOrEditBookCategoryViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/BookCategories/CreateOrEditBookCategory.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="CreateBookCategoryForm" id="CreateBookCategoryForm" role="form" class="form-horizontal">
+
+    <div class="modal-body" style="">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Category</label>
+
+        <input type="hidden" name="Id" value="@Model?.Id" data-category-name />
+
+        <div class="form-group row required">
+            <div class="col-12">
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+
+                    <div class="col-md-6 form-group">
+
+                        <div class="form-group row required">
+                            <label class="col-md-4 col-form-label" for="Name">Category</label>
+                            <input id="CategoryName" type="text" name="CategoryName" value="@Model?.CategoryName" placeholder="Enter Category Name" class="form-control" data-category-Name required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Department</label>
+                            @Html.DropDownListFor(m => m.DepartmentId, Model.Departments.Select(d => new SelectListItem {Text = d.DepartmentName, Value = d.Id.ToString()}),"Select Department", new {@class = "form-control"})
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button">@L("Cancel")</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>

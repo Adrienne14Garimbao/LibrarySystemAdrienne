@@ -1,0 +1,47 @@
+﻿@*
+    For Authors > Create or Edit
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Authors
+@using LibrarySystemAdrienne.Web.Startup
+@using LibrarySystemAdrienne.Web.Controllers
+
+@model CreateOrEditAuthorViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Authors/CreateOrEditAuthor.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="CreateAuthorForm" id="CreateAuthorForm" role="form" class="form-horizontal">
+
+    <div class="modal-body">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Author</label>
+        <input type="hidden" name="Id" value="@Model?.Id" data-author-name />
+
+        <div class="form-group row required">
+
+            <div class="col-12">
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <div class="col-md-6 form-group">
+
+                        <label class="col-md-3 col-form-label" for="Name">Author</label>
+
+                        <input id="AuthorName" type="text" name="AuthorName" value="@Model?.AuthorName" class="form-control" data-author-name placeholder="Enter Author Name" required>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;margin:10px" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button"> @L("Cancel")</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</form>
+

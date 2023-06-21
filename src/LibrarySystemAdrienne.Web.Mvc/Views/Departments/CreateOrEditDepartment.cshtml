@@ -1,0 +1,52 @@
+﻿@*
+    For Departments > Create Or Edit
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Departments
+@using LibrarySystemAdrienne.Web.Startup
+
+
+@model CreateOrEditDepartmentViewModel
+
+@{
+    ViewBag.Title = L("AddDepartment");
+    ViewBag.CurrentPageName = PageNames.AddOrEdit;
+}
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Departments/CreateOrEditDepartment.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="CreateDepartmentForm" id="CreateDepartmentForm" role="form" class="form-horizontal">
+
+    <div class="modal-body">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Department</label>
+        <input type="hidden" name="Id" value="@Model?.Id" data-dept-name />
+
+        <div class="form-group row required">
+
+            <div class="col-12">
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <div class="col-md-6 form-group">
+
+                        <label class="col-md-3 col-form-label" for="Name">Department</label>
+
+                        <input id="DepartmentName" type="text" name="DepartmentName" value="@Model?.DepartmentName" class="form-control" data-department-name placeholder="Enter Department Name" required>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;margin:10px" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button"> @L("Cancel")</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</form>
+

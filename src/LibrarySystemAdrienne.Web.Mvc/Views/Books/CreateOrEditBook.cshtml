@@ -1,0 +1,66 @@
+﻿@*
+    For Books > Create Or Edit
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Books
+@using LibrarySystemAdrienne.Web.Startup
+@using LibrarySystemAdrienne.Web.Controllers
+
+@model CreateOrEditBookViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Books/CreateOrEditBook.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="CreateBookForm" id="CreateBookForm" role="form" class="form-horizontal">
+
+    <div class="modal-body" style="">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Book</label>
+
+        <input type="hidden" name="Id" value="@Model?.Id" data-book-name />
+
+        <div class="form-group row required">
+
+            <div class="col-12">
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+
+                    <div class="col-md-6 form-group">
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Book Title</label>
+                            <input id="BookTitle" type="text" name="BookTitle" value="@Model?.BookTitle" placeholder="Book Title" class="form-control" data-dept-BookTitle required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-4 col-form-label" for="Name">Book Publisher</label>
+                            <input id="BookPublisher" type="text" name="BookPublisher" value="@Model?.BookPublisher" placeholder="Book Publisher" class="form-control" data-dept-BookPublisher required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Book Author</label>
+                            @Html.DropDownListFor(m => m.AuthorId, Model.Authors.Select(d => new SelectListItem {Text = d.AuthorName, Value = d.Id.ToString()}),"Select Author", new {@class = "form-control"})
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Category</label>
+                            @Html.DropDownListFor(m => m.CategoryId, Model.Categories.Select(d => new SelectListItem {Text = d.CategoryName, Value = d.Id.ToString()}),"Select Category", new {@class = "form-control"})
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button">@L("Cancel")</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>

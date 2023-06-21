@@ -1,0 +1,66 @@
+﻿@*
+    For Borrowers > Create
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Borrowers
+@using LibrarySystemAdrienne.Web.Startup
+@using LibrarySystemAdrienne.Web.Controllers
+
+@model CreateOrEditBorrowerViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Borrowers/CreateBorrower.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="CreateBorrowerForm" id="CreateBorrowerForm" role="form" class="form-horizontal">
+
+    <div class="modal-body" style="">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Add Borrower</label>
+
+        <input type="hidden" name="Id" value="@Model?.Id" data-borrower-id />
+
+        <div class="form-group row required">
+            <div class="col-12">
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+
+                    <div class="col-md-6 form-group">
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Date Borrowed</label>
+                            <input id="BorrowDate" type="date" name="BorrowDate" value="@Model?.BorrowDate" placeholder="Pick Borrowed Date" class="form-control" data-borrowed-date required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-4 col-form-label" for="Name">Expected Return Date</label>
+                            <input id="ExpectedReturnDate" type="date" name="ExpectedReturnDate" value="@Model?.ExpectedReturnDate" placeholder="Pick Expected Return" class="form-control" data-expected-return-date required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Select Book</label>
+                            @Html.DropDownListFor(m => m.BookId, Model.Books.Select(d => new SelectListItem {Text = d.BookTitle, Value = d.Id.ToString()}),"Select Book", new {@class = "form-control"})
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Select Student</label>
+                            @Html.DropDownListFor(m => m.StudentId, Model.Students.Select(d => new SelectListItem {Text = d.StudentName, Value = d.Id.ToString()}),"Select Student", new {@class = "form-control"})
+                        </div>
+
+                        <input type="hidden" name="IsBorrowed" id="IsBorrowed" value="true" data-IsBorrowed />
+
+
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button"> @L("Cancel") </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>

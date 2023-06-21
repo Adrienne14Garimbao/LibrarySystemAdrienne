@@ -1,0 +1,112 @@
+﻿@*
+    For Book Category > Index
+*@
+
+@using LibrarySystemAdrienne.Web.Models.BookCategories
+@using LibrarySystemAdrienne.Web.Controllers
+@using LibrarySystemAdrienne.Web.Startup
+
+@model BookCategoryListViewModel
+
+@section scripts{
+
+    <environment names="Development">
+        <script src="~/view-resources/Views/BookCategories/Index.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Category")</h1>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <a class="btn bg-blue float-sm-right" asp-controller="BooksCategories" asp-action="CreateOrEditBookCategory">
+                            <i class="fa fa-plus-square"></i>
+                            @L("AddCategory")
+                        </a>
+
+                        <div class="col-sm-6">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <form asp-controller="BooksCategories" asp-action="Index" method="get">
+
+                                    <div class="input-group">
+
+                                        <input type="text" name="searchCategory" class="form-control txt-search" />
+
+                                        <div class="input-group-prepend">
+
+                                            <button type="submit" name="searchCategory" class="btn bg-blue btn-search">
+                                                <span class="fas fa-search" aria-hidden="true"></span>@L("Search")
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="col-md-6">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="CategoryTable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@L("CategoryId")</th>
+                                        <th>@L("CategoryName")</th>
+                                        <th>@L("Departments")</th>
+
+                                        <th style="width: 150px">@L("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var category in Model.BookCategories)
+                                    {
+                                        <tr>
+                                            <td>@category.Id</td>
+                                            <td>@category.CategoryName</td>
+                                            <td>@category.Department?.DepartmentName</td>
+
+                                            <td>
+                                                <button style="width:60px; height:30px;" type="button" class="btn btn-sm bg-secondary edit-category" data-category-id="@category.Id">
+                                                    <i class="fas fa-pencil-alt"></i> @L("Edit")
+                                                </button>
+                                                <button style="width:60px; height:30px;" type="button" class="btn btn-sm bg-danger delete-category" data-category-id="@category.Id" data-category-name="@category.CategoryName">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

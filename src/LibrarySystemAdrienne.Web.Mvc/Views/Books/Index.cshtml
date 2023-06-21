@@ -1,0 +1,124 @@
+﻿@*
+    For Books > Index
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Books
+@using LibrarySystemAdrienne.Web.Controllers
+@using LibrarySystemAdrienne.Web.Startup
+
+@model BookListViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Books/Index.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@("Books")</h1>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <a class="btn bg-blue float-sm-right" asp-controller="Books" asp-action="CreateOrEditBook">
+                            <i class="fa fa-plus-square"></i>
+                            @L("AddBook")
+                        </a>
+
+                        <div class="col-sm-6">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <form asp-controller="Books" asp-action="Index" method="get">
+                                    <div class="input-group">
+
+                                        <input type="text" name="searchBook" class="form-control txt-search" />
+
+                                        <div class="input-group-prepend">
+
+                                            <button type="submit" name="searchBook" class="btn bg-blue btn-search">
+                                                <span class="fas fa-search" aria-hidden="true"></span>@L("Search")
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-6">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+
+                            <table id="BookTable" class="table table-striped table-bordered">
+
+                                <thead>
+                                                              
+                                    <tr>
+                                        <th>@L("BookId")</th>
+                                        <th>@L("BookTitle")</th>
+                                        <th>@L("BookPublisher")</th>
+                                        <th>@L("IsBorrowed")</th>
+                                        <th>@L("AuthorsName")</th>
+                                        <th>@L("CategoryName")</th>
+
+                                        <th style="width: 150px">@L("Actions")</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var book in Model.Books)
+                                    {
+                                        <tr>
+                                            <td>@book.Id</td>
+                                            <td>@book.BookTitle</td>
+                                            <td>@book.BookPublisher</td>
+                                            <td>@book.IsBorrowed</td>
+                                            <td>@book.Author?.AuthorName</td>
+                                            <td>@book.Category?.CategoryName</td>
+
+                                            <td>
+                                                <button style="width:60px; height:30px;" type="button" class="btn btn-sm bg-secondary edit-book" data-book-id="@book.Id">
+                                                    <i class="fas fa-pencil-alt"></i> @L("Edit")
+                                                </button>
+                                                <button style="width:60px; height:30px;" type="button" class="btn btn-sm bg-danger delete-book" data-book-isBorrowed="@book.IsBorrowed" data-book-id="@book.Id" data-book-name="@book.BookTitle">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

@@ -1,0 +1,61 @@
+﻿@*
+    For Borrowers > Update
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Borrowers
+@using LibrarySystemAdrienne.Web.Controllers
+@using LibrarySystemAdrienne.Web.Startup
+
+@model CreateOrEditBorrowerViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Borrowers/UpdateBorrowers.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="frmReturn" id="frmReturn" role="form" class="form-horizontal">
+
+    <div class="modal-body" style="">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Return</label>
+
+        <input type="hidden" name="Id" value="@Model?.Id" data-borrower-id />
+
+        <div class="form-group row required">
+            <div class="col-12">
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+
+                    <div class="col-md-6 form-group">
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Date Borrowed</label>
+                            <input id="BorrowDate" disabled type="date" name="BorrowDate" value="@Model?.BorrowDate" placeholder="Pick Borrowed Date" class="form-control" data-borrowed-date>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-4 col-form-label" for="Name">Expected Return Date</label>
+                            <input id="ExpectedReturnDate" disabled type="date" name="ExpectedReturnDate" value="@Model?.ExpectedReturnDate" placeholder="Pick Expected Return" class="form-control" data-expected-return-date>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Returned Date</label>
+                            <input id="ReturnDate" type="date" name="ReturnDate" value="@Model?.ReturnDate" class="form-control" data-return-date>
+                        </div>
+
+                       @* <input type="hidden" name="IsBorrowed" id="IsBorrowed" value="false" data-isBorrowed />*@
+
+
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button"> @L("Cancel") </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>

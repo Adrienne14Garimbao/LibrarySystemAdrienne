@@ -1,0 +1,64 @@
+﻿@*
+    For Students > Create or Edit
+*@
+
+@using LibrarySystemAdrienne.Web.Models.Students
+@using LibrarySystemAdrienne.Web.Controllers
+@using LibrarySystemAdrienne.Web.Startup
+
+@model CreateOrEditStudentViewModel
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Students/CreateOrEditStudent.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<form name="CreateStudentForm" id="CreateStudentForm" role="form" class="form-horizontal">
+
+    <div class="modal-body" style="">
+
+        <label style="font-size:24px" class="col-md-3 col-form-label">Student</label>
+        <input type="hidden" name="Id" value="@Model?.Id" data-student-id />
+
+        <div class="form-group row required">
+            <div class="col-12">
+
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+
+                    <div class="col-md-6 form-group">
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Name</label>
+                            <input id="StudentName" type="text" name="StudentName" value="@Model?.StudentName" placeholder="Full Name" class="form-control" data-student-Name required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-4 col-form-label" for="Name">Contact Number</label>
+                            <input id="StudentContact" type="text" name="StudentContactNumber" value="@Model?.StudentContactNumber" placeholder="Contact Number" class="form-control" data-student-contactNumber required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Email</label>
+                            <input id="Name" type="text" name="StudentEmail" value="@Model?.StudentEmail" placeholder="Email" class="form-control" data-student-mmail required>
+                        </div>
+
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Department</label>
+                            @Html.DropDownListFor(m => m.DepartmentId, Model.Departments.Select(d => new SelectListItem {Text = d.DepartmentName, Value = d.Id.ToString()}),"Select Department", new {@class = "form-control"})
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center;align-items:center;" class="row">
+                    <button style="width:70px; height:40px; margin:5px;" id="Submit" type="submit" name="Submit" class="btn bg-blue float-sm-right save-button"> @L("Save") </button>
+                    <button style="width:70px; height:40px; margin:5px;" id="Cancel" type="button" name="Cancel" class="btn btn-sm bg-secondary cancel-button">@L("Cancel")</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</form>
