@@ -14,11 +14,11 @@
     </environment>
 }
 
-<form name="frmReturn" id="frmReturn" role="form" class="form-horizontal">
+<form name="UpdateForm" id="UpdateForm" role="form" class="form-horizontal">
 
     <div class="modal-body" style="">
 
-        <label style="font-size:24px" class="col-md-3 col-form-label">Return</label>
+        <label style="font-size:24px" class="col-md-3 col-form-label">Update </label>
 
         <input type="hidden" name="Id" value="@Model?.Id" data-borrower-id />
 
@@ -29,22 +29,31 @@
                     <div class="col-md-6 form-group">
 
                         <div class="form-group row required">
-                            <label class="col-md-3 col-form-label" for="Name">Date Borrowed</label>
+                            <label class="col-md-3 col-form-label" for="BorrowDate">Date Borrowed</label>
                             <input id="BorrowDate" disabled type="date" name="BorrowDate" value="@Model?.BorrowDate" placeholder="Pick Borrowed Date" class="form-control" data-borrowed-date>
                         </div>
 
                         <div class="form-group row required">
-                            <label class="col-md-4 col-form-label" for="Name">Expected Return Date</label>
+                            <label class="col-md-4 col-form-label" for="ExpectedReturnDate">Expected Return Date</label>
                             <input id="ExpectedReturnDate" disabled type="date" name="ExpectedReturnDate" value="@Model?.ExpectedReturnDate" placeholder="Pick Expected Return" class="form-control" data-expected-return-date>
                         </div>
 
                         <div class="form-group row required">
-                            <label class="col-md-3 col-form-label" for="Name">Returned Date</label>
+                            <label class="col-md-3 col-form-label" for="ReturnDate">Returned Date</label>
                             <input id="ReturnDate" type="date" name="ReturnDate" value="@Model?.ReturnDate" class="form-control" data-return-date>
                         </div>
 
-                       @* <input type="hidden" name="IsBorrowed" id="IsBorrowed" value="false" data-isBorrowed />*@
+                        <div hidden class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Select Book</label>
+                            @Html.DropDownListFor(m => m.BookId, Model.Books.Select(d => new SelectListItem {Text = d.BookTitle, Value = d.Id.ToString()}),"Select Book", new {@class = "form-control" ,type="hidden" })
+                        </div>
 
+                        <div hidden class="form-group row required">
+                            <label class="col-md-3 col-form-label" for="Name">Select Student</label>
+                            @Html.DropDownListFor(m => m.StudentId, Model.Students.Select(d => new SelectListItem {Text = d.StudentName, Value = d.Id.ToString()}),"Select Student", new {@class = "form-control" ,type="hidden" })
+                        </div>
+
+                        @*<input type="hidden" name="IsBorrowed" id="IsBorrowed" value="false" data-isBorrowed />*@
 
                     </div>
                 </div>

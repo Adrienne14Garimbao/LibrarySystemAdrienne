@@ -37,16 +37,23 @@
         }
         var borrower = _$form.serializeFormToObject();
 
-        if (borrower.Id == 0) {
-            _borrowerAppService.create(borrower).done(function () {
-                borrower.ReturnDate = null;
-                _bookAppService.updateStatusOfBooks({
-                    Id: borrower.BookId,
-                }).done(function () {
-                    redirectToBorrowerIndex();
-                });
+        abp.message.confirm('Are you sure you want to save?', 'Save')
+            .then(function (confirmed) {
+                if (confirmed)
+                {
+
+                    if (borrower.Id == 0) {
+                        _borrowerAppService.create(borrower).done(function () {
+                            borrower.ReturnDate = null;
+                            _bookAppService.updateStatusOfBooks({
+                                Id: borrower.BookId,
+                            }).done(function () {
+                                redirectToBorrowerIndex();
+                            });
+                        });
+                    }
+                }
             });
-        }
  
     }
 

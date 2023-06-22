@@ -1,7 +1,8 @@
 ﻿// #region Borrower > Index
 (function ($) {
 
-    var _borrowerAppService = abp.services.app.borrower; 
+    var _borrowerAppService = abp.services.app.borrower,
+        _bookAppService = abp.services.app.book;  
 
     var l = abp.localization.getSource('LibrarySystemAdrienne');
 
@@ -26,6 +27,7 @@
             borrowerName = $(this).attr('data-borrower-name'),
             bookName = $(this).attr('data-book-name'),
             bookId = $(this).attr('data-book-id');
+            bookIsBorrowed = $(this).attr('data-IsBorrowed');
 
         DeleteBorrower(borrowerId, borrowerName, bookId, bookName);
     });
@@ -42,13 +44,12 @@
                     _borrowerAppService.delete({
                         id: borrowerId
                     }).done(() => {
-                        _borrowerAppService.updateStatusOfBooks({
-                                id: bookId,
-                            }).done(() => {
-                                abp.notify.info(l('SuccessfullyDeleted'));
-                                window.location.href = BorrowerHomePage;
-                            });   
-
+                        _bookAppService.updateStatusOfBooks({
+                            id: bookId,
+                        }).done(() => {
+                            abp.notify.info(l('SuccessfullyDeleted'));
+                            window.location.href = BorrowerHomePage;
+                        });
                     });
                 }
             }

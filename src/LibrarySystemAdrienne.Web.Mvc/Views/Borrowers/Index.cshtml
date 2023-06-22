@@ -107,7 +107,12 @@
                                                                    
 
                                             <td>
-                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle">
+
+                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-green btn-return" >
+                                                    @L("ReturnBook") @*fas fa-hand-holding*@
+                                                </button>
+
+                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed" >
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </td>
@@ -123,12 +128,16 @@
                                             <td>@borrower.Book?.BookTitle</td>
                                             <td>@borrower.BorrowDate.ToString("MMMM/dd/yyyy")</td>
                                             <td>@borrower.ExpectedReturnDate.ToString("MMMM/dd/yyyy")</td>
-                                            <td>@borrower.ReturnDate</td>
+                                            <td></td>
                                                            
 
                                             <td>
-                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm btn-success btn-return" data-borrower-id="@borrower.Id">
-                                                    <i class="fas fa-hand-holding"></i> @L("ReturnBook")
+                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-green btn-return" data-borrower-id="@borrower.Id">
+                                                    @L("ReturnBook") @*fas fa-hand-holding*@
+                                                </button>
+
+                                                <button style="width:60px; height:50px;" disabled type="button" class="btn btn-sm bg-danger delete-borrower" >
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
 
                                             </td>
@@ -139,6 +148,7 @@
                                         <!-- #region Book Return on time -->
 
                                         <tr id="borrowerTable" style="background-color:forestgreen;">
+
                                             <td>@borrower.Id</td>
                                             <td>@borrower.Student?.StudentName</td>
                                             <td>@borrower.Book?.BookTitle</td>
@@ -149,7 +159,11 @@
 
                                             <td>
 
-                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle">
+                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-green btn-return" >
+                                                    @L("ReturnBook") @*fas fa-hand-holding*@
+                                                </button>
+
+                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                                 

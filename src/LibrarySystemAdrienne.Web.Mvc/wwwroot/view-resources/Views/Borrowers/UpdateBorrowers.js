@@ -5,7 +5,7 @@
         _bookAppService = abp.services.app.book;
 
     var l = abp.localization.getSource('LibrarySystemAdrienne'),
-        _$form = $('#frmReturn');
+        _$form = $('#UpdateForm');
 
     var BorrowerHomePage = "/Borrowers";
 
@@ -19,7 +19,6 @@
     window.onload = function () {
         document.getElementById('BorrowDate').value = BorrowDate.toISOString().slice(0, 10);
         document.getElementById('ExpectedReturnDate').value = ExpectedReturnDate.toISOString().slice(0, 10);
-        
     }
     // #endregion
 
@@ -33,7 +32,7 @@
     // #region update() - To update data and return books
     function update()
     {
-        document.getElementById('ReturnDate').value = ReturnDate.toISOString().slice(0, 10);
+        
         if (!_$form.valid()) {
             return;
         }
@@ -41,32 +40,52 @@
         var borrower = _$form.serializeFormToObject();
 
         if (borrower.Id != 0) {
-            
-            if (borrower.ExpectedReturnDate < borrower.ReturnDate)
-            {
-                /*  Late */
+
+            document.getElementById('ReturnDate').value = ReturnDate.toISOString().slice(0, 10);
+
+            if (borrower.ReturnDate == borrower.ExpectedReturnDate) {
+
+                /*  Book returned on time  */
                 _borrowerAppService.update(borrower).done(function () {
-                    _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function ()
-                    {
+                    _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
+                        alert("Nice! Book returned on time.");
+                        redirectToBorrowerIndex();
+                    });
+                });
+            }
+            else if (borrower.ReturnDate < borrower.ExpectedReturnDate && borrower.ReturnDate >= borrower.BorrowDate )
+            {
+                /* Book returned earlier than expected date */
+
+                _borrowerAppService.update(borrower).done(function () {
+                    _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
+                        alert("Yey! Book returned early.");
+                        redirectToBorrowerIndex();
+                    });
+                });
+
+
+            }
+            else if (borrower.ReturnDate > borrower.ExpectedReturnDate) {
+
+                /* Book returned late */
+                _borrowerAppService.update(borrower).done(function () {
+                    _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
                         alert("Book not returned on time");
                         redirectToBorrowerIndex();
                     });
                 });
-            }
-            else if (borrower.ReturnDate < borrower.BorrowDate)
-            {
-                alert("Cannot return book earlier than book borrowed date");
-                /* Too early */
+
+
             }
             else
             {
-                _borrowerAppService.update(borrower).done(function () {
-                    _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function ()
-                    {
-                        alert("Book returned on time");
-                        redirectToBorrowerIndex();
-                    });
-                });
+
+                if (borrower.ReturnDate < borrower.BorrowDate) {
+                    /* Invalid input date */
+                    alert("Cannot return book earlier than book borrowed date");
+
+                }
             }
 
         }
