@@ -8,6 +8,12 @@
 
 @model CreateOrEditBorrowerViewModel
 
+
+@{
+    ViewBag.Title = L("AddBorrower");
+    ViewBag.CurrentPageName = PageNames.Borrowers;
+}
+
 @section scripts{
     <environment names="Development">
         <script src="~/view-resources/Views/Borrowers/CreateBorrower.js" asp-append-version="true"></script>

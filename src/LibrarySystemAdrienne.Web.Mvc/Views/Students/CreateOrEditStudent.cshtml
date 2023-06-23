@@ -8,6 +8,12 @@
 
 @model CreateOrEditStudentViewModel
 
+@{
+    ViewBag.Title = L("CreateOrEdit");
+    ViewBag.CurrentPageName = PageNames.Students;
+}
+
+
 @section scripts{
     <environment names="Development">
         <script src="~/view-resources/Views/Students/CreateOrEditStudent.js" asp-append-version="true"></script>

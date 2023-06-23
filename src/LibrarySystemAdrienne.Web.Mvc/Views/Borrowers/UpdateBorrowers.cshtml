@@ -8,6 +8,12 @@
 
 @model CreateOrEditBorrowerViewModel
 
+@{
+    ViewBag.Title = L("ReturnBookBorrowed");
+    ViewBag.CurrentPageName = PageNames.Borrowers;
+}
+
+
 @section scripts{
     <environment names="Development">
         <script src="~/view-resources/Views/Borrowers/UpdateBorrowers.js" asp-append-version="true"></script>
@@ -18,7 +24,7 @@
 
     <div class="modal-body" style="">
 
-        <label style="font-size:24px" class="col-md-3 col-form-label">Update </label>
+        <label style="font-size:24px" class="col-md-3 col-form-label">Return </label>
 
         <input type="hidden" name="Id" value="@Model?.Id" data-borrower-id />
 
@@ -45,15 +51,15 @@
 
                         <div hidden class="form-group row required">
                             <label class="col-md-3 col-form-label" for="Name">Select Book</label>
-                            @Html.DropDownListFor(m => m.BookId, Model.Books.Select(d => new SelectListItem {Text = d.BookTitle, Value = d.Id.ToString()}),"Select Book", new {@class = "form-control" ,type="hidden" })
+                            @Html.DropDownListFor(m => m.BookId, Model.Books.Select(d => new SelectListItem {Text = d.BookTitle, Value = d.Id.ToString()}),"Select Book", new {@class = "form-control" })
                         </div>
 
                         <div hidden class="form-group row required">
                             <label class="col-md-3 col-form-label" for="Name">Select Student</label>
-                            @Html.DropDownListFor(m => m.StudentId, Model.Students.Select(d => new SelectListItem {Text = d.StudentName, Value = d.Id.ToString()}),"Select Student", new {@class = "form-control" ,type="hidden" })
+                            @Html.DropDownListFor(m => m.StudentId, Model.Students.Select(d => new SelectListItem {Text = d.StudentName, Value = d.Id.ToString()}),"Select Student", new {@class = "form-control" })
                         </div>
 
-                        @*<input type="hidden" name="IsBorrowed" id="IsBorrowed" value="false" data-isBorrowed />*@
+                        <input type="hidden" name="IsBorrowed" id="IsBorrowed" value="true" data-isBorrowed />
 
                     </div>
                 </div>

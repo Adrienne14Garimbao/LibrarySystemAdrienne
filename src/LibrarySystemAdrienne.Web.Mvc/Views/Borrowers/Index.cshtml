@@ -8,6 +8,12 @@
 
 @model BorrowerListViewModel
 
+@{
+    ViewBag.Title = L("Borrower");
+    ViewBag.CurrentPageName = PageNames.Borrowers;
+}
+
+
 @section scripts{
     <environment names="Development">
         <script src="~/view-resources/Views/Borrowers/Index.js" asp-append-version="true"></script>
@@ -96,7 +102,7 @@
                                     @if (borrower.ExpectedReturnDate < borrower.ReturnDate)
                                     {           <!--  Book Returned Late  -->
 
-                                        <tr style="background-color:darkred" id="borrowerTable">
+                                        <tr style="background-color:firebrick" id="borrowerTable">
 
                                             <td>@borrower.Id</td>
                                             <td>@borrower.Student?.StudentName</td>
@@ -104,7 +110,6 @@
                                             <td>@borrower.BorrowDate.ToString("MMMM/dd/yyyy")</td>
                                             <td>@borrower.ExpectedReturnDate.ToString("MMMM/dd/yyyy")</td>
                                             <td>@borrower.ReturnDate.ToString("MMMM/dd/yyyy")</td>
-                                                                   
 
                                             <td>
 
@@ -112,9 +117,10 @@
                                                     @L("ReturnBook") @*fas fa-hand-holding*@
                                                 </button>
 
-                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed" >
+                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
+
                                             </td>
                                         </tr>
                                     }
@@ -136,7 +142,7 @@
                                                     @L("ReturnBook") @*fas fa-hand-holding*@
                                                 </button>
 
-                                                <button style="width:60px; height:50px;" disabled type="button" class="btn btn-sm bg-danger delete-borrower" >
+                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
 
@@ -147,7 +153,7 @@
                                     {
                                         <!-- #region Book Return on time -->
 
-                                        <tr id="borrowerTable" style="background-color:forestgreen;">
+                                        <tr id="borrowerTable" style="background-color:lightgreen;">
 
                                             <td>@borrower.Id</td>
                                             <td>@borrower.Student?.StudentName</td>
@@ -155,7 +161,6 @@
                                             <td>@borrower.BorrowDate.ToString("MMMM/dd/yyyy")</td>
                                             <td>@borrower.ExpectedReturnDate.ToString("MMMM/dd/yyyy")</td>
                                             <td>@borrower.ReturnDate.ToString("MMMM/dd/yyyy")</td>
-                                                                      
 
                                             <td>
 
@@ -163,7 +168,7 @@
                                                     @L("ReturnBook") @*fas fa-hand-holding*@
                                                 </button>
 
-                                                <button style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
+                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                                 

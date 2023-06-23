@@ -178,8 +178,14 @@
     <text name="ReturnDate">Date Returned</text>
     <text name="ReturnBook">Return</text>
 	<text name="UpdateBorrower">Update</text>
+    <text name="ReturnBookBorrowed">Return Book</text>
     <!-- #endregion Borrower -->
 
+    <!-- #region Controls -->
+    <text name="CreateOrEdit">Create or Edit</text>
+    <!-- #endregion Controls -->
+	  
+	  
     <text name="AreYouSureWantToRemoveThisBorrower">Are you sure want to remove "{0}" from the list. Who borrowed "{1}" ?</text>
 
 	  

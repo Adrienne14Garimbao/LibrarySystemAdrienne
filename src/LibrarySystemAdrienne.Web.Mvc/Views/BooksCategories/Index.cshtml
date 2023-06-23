@@ -8,6 +8,11 @@
 
 @model BookCategoryListViewModel
 
+@{
+    ViewBag.Title = L("Category");
+    ViewBag.CurrentPageName = PageNames.BookCategories;
+}
+
 @section scripts{
 
     <environment names="Development">

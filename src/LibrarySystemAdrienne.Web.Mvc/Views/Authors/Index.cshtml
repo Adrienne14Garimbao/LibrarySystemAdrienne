@@ -8,6 +8,12 @@
 
 @model AuthorListViewModel
 
+@{
+    ViewBag.Title = L("Author");
+    ViewBag.CurrentPageName = PageNames.Authors;
+}
+
+
 @section scripts{
 
     <environment names="Development">

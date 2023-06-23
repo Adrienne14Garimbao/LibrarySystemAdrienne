@@ -48,7 +48,7 @@
                 /*  Book returned on time  */
                 _borrowerAppService.update(borrower).done(function () {
                     _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
-                        alert("Nice! Book returned on time.");
+                        alert("Nice! Book is returned on time.");
                         redirectToBorrowerIndex();
                     });
                 });
@@ -59,31 +59,30 @@
 
                 _borrowerAppService.update(borrower).done(function () {
                     _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
-                        alert("Yey! Book returned early.");
+                        alert("Yey! Book is returned early.");
                         redirectToBorrowerIndex();
                     });
                 });
 
 
             }
-            else if (borrower.ReturnDate > borrower.ExpectedReturnDate) {
-
+            else if (borrower.ReturnDate > borrower.ExpectedReturnDate)
+            {
                 /* Book returned late */
                 _borrowerAppService.update(borrower).done(function () {
                     _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
-                        alert("Book not returned on time");
+                        alert("Book is not returned on time");
                         redirectToBorrowerIndex();
                     });
                 });
-
-
+          
             }
             else
             {
 
                 if (borrower.ReturnDate < borrower.BorrowDate) {
                     /* Invalid input date */
-                    alert("Cannot return book earlier than book borrowed date");
+                    alert("Cannot return the book earlier than book borrowed date");
 
                 }
             }

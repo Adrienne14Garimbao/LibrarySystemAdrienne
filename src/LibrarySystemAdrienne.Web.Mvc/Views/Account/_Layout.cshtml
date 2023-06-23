@@ -11,7 +11,7 @@
     AbpAntiForgeryManager.SetCookie(Context);
 
     var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
-    pageTitle += "LibrarySystemAdrienne";
+    pageTitle += "Library System";
 }
 <!DOCTYPE html>
 <html lang="@LanguageManager.CurrentLanguage.Name">
@@ -28,7 +28,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="/"><b>LibrarySystemAdrienne</b></a>
+            <a href="/"><b>@L("AFG")</b></a>
         </div>
         <div class="card">
             @if (MultiTenancyConfig.IsEnabled)
@@ -46,7 +46,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <small>&copy; @DateTime.Now.Year LibrarySystemAdrienne. <b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</small>
+                <small>&copy; @DateTime.Now.Year @L("AFG"). <b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</small>
             </div>
         </div>
     </div>

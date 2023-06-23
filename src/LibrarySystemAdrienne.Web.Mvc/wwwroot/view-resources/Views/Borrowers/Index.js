@@ -27,7 +27,6 @@
             borrowerName = $(this).attr('data-borrower-name'),
             bookName = $(this).attr('data-book-name'),
             bookId = $(this).attr('data-book-id');
-            bookIsBorrowed = $(this).attr('data-IsBorrowed');
 
         DeleteBorrower(borrowerId, borrowerName, bookId, bookName);
     });
@@ -44,6 +43,7 @@
                     _borrowerAppService.delete({
                         id: borrowerId
                     }).done(() => {
+                        //borrower.bookIsBorrowed = true;
                         _bookAppService.updateStatusOfBooks({
                             id: bookId,
                         }).done(() => {

@@ -8,6 +8,12 @@
 
 @model CreateOrEditBookViewModel
 
+@{
+    ViewBag.Title = L("CreateOrEdit");
+    ViewBag.CurrentPageName = PageNames.Books;
+}
+
+
 @section scripts{
     <environment names="Development">
         <script src="~/view-resources/Views/Books/CreateOrEditBook.js" asp-append-version="true"></script>
