@@ -20,7 +20,7 @@
 
 
     // #region Delete Author Button
-    $(document).on('click', '.delete-department', function () {
+    $(document).on('click', '.delete-author', function () {
         var authorId = $(this).attr("data-author-id");
         var authorName = $(this).attr('data-author-name');
 
