@@ -10,11 +10,11 @@
         StudentEditPage = "/Students/CreateOrEditStudent/";
 
     // #region Edit Student Button 
-    $(document).on('click', '.edit-student', function (e) {
+    $(document).on('click', '.edit-student', function (CatchError) {
         var studentId = $(this).attr("data-student-id");
 
-        e.preventDefault();
         window.location.href = StudentEditPage + studentId;
+        CatchError.preventDefault();
 
     });
     // #endregion

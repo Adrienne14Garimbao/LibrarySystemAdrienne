@@ -9,11 +9,11 @@
         BookEditPage = "/Books/CreateOrEditBook/";
 
     // #region Edit Book Button
-    $(document).on('click', '.edit-book', function (e) {
+    $(document).on('click', '.edit-book', function (CatchError) {
         var bookId = $(this).attr("data-book-id");
 
-        e.preventDefault();
         window.location.href = BookEditPage + bookId;
+        CatchError.preventDefault();
 
     });
     // #endregion

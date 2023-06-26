@@ -9,11 +9,11 @@
         DepartmentEditPage = "/Departments/CreateOrEditDepartment/";
 
     // #region Edit Department Button 
-    $(document).on('click', '.edit-department', function (e) {
+    $(document).on('click', '.edit-department', function (CatchError) {
         var departmentId = $(this).attr("data-department-id");
 
-        e.preventDefault();
         window.location.href = DepartmentEditPage + departmentId;
+        CatchError.preventDefault();
 
     });
     // #endregion

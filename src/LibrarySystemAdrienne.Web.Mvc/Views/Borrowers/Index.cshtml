@@ -113,12 +113,8 @@
 
                                             <td>
 
-                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-green btn-return" >
-                                                    @L("ReturnBook") @*fas fa-hand-holding*@
-                                                </button>
-
-                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
-                                                    <i class="fas fa-trash"></i>
+                                                <button disabled style="width:100px; height:50px;" type="button" class="btn btn-sm bg-danger btn-return">
+                                                    Late @*fas fa-hand-holding*@
                                                 </button>
 
                                             </td>
@@ -164,13 +160,10 @@
 
                                             <td>
 
-                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-green btn-return" >
-                                                    @L("ReturnBook") @*fas fa-hand-holding*@
+                                                <button disabled style="width:100px; height:50px;" type="button" class="btn btn-sm bg-green btn-return" >
+                                                    On Time @*fas fa-hand-holding*@
                                                 </button>
 
-                                                <button disabled style="width:60px; height:50px;" type="button" class="btn btn-sm bg-danger delete-borrower" data-borrower-id="@borrower.Id" data-borrower-name="@borrower.Student.StudentName" data-book-id="@borrower.Book?.Id" data-book-name="@borrower.Book?.BookTitle" data-IsBorrowed="@borrower.Book?.IsBorrowed">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
                                                 
                                             </td>
                                         </tr>

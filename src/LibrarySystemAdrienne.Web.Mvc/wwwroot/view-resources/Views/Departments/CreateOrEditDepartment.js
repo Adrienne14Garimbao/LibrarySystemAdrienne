@@ -8,10 +8,10 @@
 
     var DepartmentHomePage = "/Departments";
 
-    _$form.submit(function (e) {
-        e.preventDefault();
-
+    _$form.submit(function (CatchError) {
+        
         CreateOrEdit();
+        CatchError.preventDefault();
     });
 
 

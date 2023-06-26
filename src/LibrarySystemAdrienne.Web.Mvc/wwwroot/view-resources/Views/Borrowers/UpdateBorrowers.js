@@ -23,10 +23,10 @@
     // #endregion
 
 
-    _$form.submit(function (tryAndCatch)
+    _$form.submit(function (CatchError)
     {
-        tryAndCatch.preventDefault();
         update();
+        CatchError.preventDefault();
     });
 
     // #region update() - To update data and return books

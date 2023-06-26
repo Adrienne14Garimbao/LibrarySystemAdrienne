@@ -11,24 +11,25 @@
 
 
     // #region Return Borrower Button
-    $(document).on('click', '.btn-return', function (e) {
+    $(document).on('click', '.btn-return', function (CatchError) {
         var borrowerId = $(this).attr("data-borrower-id");
 
-        e.preventDefault();
         window.location.href = BorrowerUpdatePage + borrowerId;
-
+        CatchError.preventDefault();
     });
     // #endregion
 
 
     // #region Delete Borrower Button
-    $(document).on('click', '.delete-borrower', function () {
+    $(document).on('click', '.delete-borrower', function (CatchError) {
+
         var borrowerId = $(this).attr("data-borrower-id"),
             borrowerName = $(this).attr('data-borrower-name'),
             bookName = $(this).attr('data-book-name'),
             bookId = $(this).attr('data-book-id');
 
         DeleteBorrower(borrowerId, borrowerName, bookId, bookName);
+        CatchError.preventDefault();
     });
     // #endregion
 

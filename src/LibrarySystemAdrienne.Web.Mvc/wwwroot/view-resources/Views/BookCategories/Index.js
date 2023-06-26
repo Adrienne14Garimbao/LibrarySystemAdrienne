@@ -9,11 +9,11 @@
         CategoryEditPage = "/BooksCategories/CreateOrEditBookCategory/";
 
     // #region Edit Category Button
-    $(document).on('click', '.edit-category', function (e) {
+    $(document).on('click', '.edit-category', function (CatchError) {
         var categorytId = $(this).attr("data-category-id");
-
-        e.preventDefault();
+  
         window.location.href = CategoryEditPage + categorytId;
+        CatchError.preventDefault();
 
     });
     // #endregion

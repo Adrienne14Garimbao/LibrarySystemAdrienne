@@ -178,7 +178,7 @@
     <text name="ReturnDate">Date Returned</text>
     <text name="ReturnBook">Return</text>
 	<text name="UpdateBorrower">Update</text>
-    <text name="ReturnBookBorrowed">Return Book</text>
+    <text name="BkAlreadyReturn">Returned</text>
     <!-- #endregion Borrower -->
 
     <!-- #region Controls -->

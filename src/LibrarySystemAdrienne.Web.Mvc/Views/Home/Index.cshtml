@@ -1,19 +1,9 @@
 ﻿@using LibrarySystemAdrienne.Web.Startup
+@using LibrarySystemAdrienne.Web.Controllers
+
 @{
     ViewBag.Title = L("HomePage");
     ViewBag.CurrentPageName = PageNames.Home;
-}
-
-@section scripts
-{
-    <environment names="Development">
-        <script src="~/libs/chartjs/dist/Chart.js" asp-append-version="true"></script>
-        <script src="~/view-resources/Views/Home/Index.js" asp-append-version="true"></script>
-    </environment>
-
-    <environment names="Staging,Production">
-        <script src="~/view-resources/Views/_Bundles/home-index.min.js" asp-append-version="true"></script>
-    </environment>
 }
 
 <div class="content-header">

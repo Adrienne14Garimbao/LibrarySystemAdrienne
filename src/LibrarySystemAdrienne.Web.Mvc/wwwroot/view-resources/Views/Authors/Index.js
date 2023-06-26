@@ -9,11 +9,11 @@
         AuthorEditPage = "/Authors/CreateOrEditAuthor/";
 
     // #region Edit Author Button 
-    $(document).on('click', '.edit-author', function (e) {
+    $(document).on('click', '.edit-author', function (CatchError) {
         var authorId = $(this).attr("data-author-id");
 
-        e.preventDefault();
         window.location.href = AuthorEditPage + authorId;
+        CatchError.preventDefault();
 
     });
     // #endregion
