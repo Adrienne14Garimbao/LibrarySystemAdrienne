@@ -53,13 +53,14 @@ namespace LibrarySystemAdrienne.Books
         }
         #endregion
 
-        public async Task<PagedResultDto<BookDto>> GetAllBookWithCategoryAndAuthor (PagedResultRequestDto input)
+        public async Task<PagedResultDto<BookDto>> GetAllBookWithCategoryAndAuthor (PagedBookResultRequestDto input)
         {
             var book = await _repositoryBook.GetAll()
                 .Include(b => b.Author)
                 .Include(b => b.Category)
                 .Select(b => ObjectMapper.Map<BookDto>(b))
                 .ToListAsync();
+
 
             return new PagedResultDto<BookDto>(book.Count(), book);
         }
@@ -91,6 +92,19 @@ namespace LibrarySystemAdrienne.Books
             return updateBook;
         }
 
+        public async Task<BookDto> UpdateStatusOfBooksForEdit(EntityDto<int> input)
+        {
+            var book = await GetAsync(input);
+
+            if (book.IsBorrowed == false)
+            {
+                book.IsBorrowed = false;
+            }
+
+            var updateBook = await UpdateAsync(book);
+
+            return updateBook;
+        }
 
     }
 }

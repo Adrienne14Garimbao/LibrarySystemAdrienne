@@ -11,11 +11,12 @@ namespace LibrarySystemAdrienne.Books
 {
     public interface IBookAppService : IAsyncCrudAppService<BookDto, int, PagedBookResultRequestDto, CreateBookDto, BookDto>
     {
-        Task<PagedResultDto<BookDto>> GetAllBookWithCategoryAndAuthor(PagedResultRequestDto input);
+        Task<PagedResultDto<BookDto>> GetAllBookWithCategoryAndAuthor(PagedBookResultRequestDto input);
 
         Task<List<BookDto>> GetAllBooksToBeBorrowed();
 
         Task<BookDto> UpdateStatusOfBooks(EntityDto<int> input);
 
+        Task<BookDto> UpdateStatusOfBooksForEdit(EntityDto<int> input);
     }
 }

@@ -7,21 +7,30 @@
     var l = abp.localization.getSource('LibrarySystemAdrienne');
 
     var BorrowerHomePage = "/Borrowers",
-        BorrowerUpdatePage = "/Borrowers/UpdateBorrowers/";
+        BorrowerUpdatePage = "/Borrowers/UpdateBorrowers/",
+        BorrowerEditPage = "/Borrowers/EditBorrowers/";
 
 
     // #region Return Borrower Button
-    $(document).on('click', '.btn-return', function (CatchError) {
+    $(document).on('click', '.btn-return', function () {
         var borrowerId = $(this).attr("data-borrower-id");
 
         window.location.href = BorrowerUpdatePage + borrowerId;
-        CatchError.preventDefault();
+    });
+    // #endregion
+
+    // #region Return Borrower Button
+    $(document).on('click', '.btn-edit', function () {
+        var borrowerId = $(this).attr("data-borrower-id");
+
+        window.location.href = BorrowerEditPage + borrowerId;
     });
     // #endregion
 
 
+
     // #region Delete Borrower Button
-    $(document).on('click', '.delete-borrower', function (CatchError) {
+    $(document).on('click', '.delete-borrower', function () {
 
         var borrowerId = $(this).attr("data-borrower-id"),
             borrowerName = $(this).attr('data-borrower-name'),
@@ -29,7 +38,9 @@
             bookId = $(this).attr('data-book-id');
 
         DeleteBorrower(borrowerId, borrowerName, bookId, bookName);
-        CatchError.preventDefault();
+
+
+
     });
     // #endregion
 
@@ -44,12 +55,12 @@
                     _borrowerAppService.delete({
                         id: borrowerId
                     }).done(() => {
-                        //borrower.bookIsBorrowed = true;
                         _bookAppService.updateStatusOfBooks({
                             id: bookId,
                         }).done(() => {
-                            abp.notify.info(l('SuccessfullyDeleted'));
-                            window.location.href = BorrowerHomePage;
+
+                            abp.message.success(l('SuccessfullyDeleted'), 'Congratulations');
+                            redirectToBorrowerIndex();
                         });
                     });
                 }
@@ -57,6 +68,17 @@
         );
     }
     // #endregion
+
+    // #region redirectToBorrowerIndex() - to redirect in borrowers home page
+    function redirectToBorrowerIndex(CatchError) {
+
+        window.location.href = BorrowerHomePage;
+
+        CatchError.preventDefault();
+
+    }
+    // #endregion
+
 
 
 })(jQuery);

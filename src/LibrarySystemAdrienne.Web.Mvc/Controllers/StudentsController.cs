@@ -14,8 +14,6 @@ namespace LibrarySystemAdrienne.Web.Controllers
     public class StudentsController : LibrarySystemAdrienneControllerBase
     {
 
-        //public List<StudentDto> Students { get; private set; }
-
         private IStudentAppService _studentIAppService; 
         private IDepartmentAppService _departmentIAppService;
 

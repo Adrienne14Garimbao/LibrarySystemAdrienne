@@ -5,7 +5,8 @@
         _bookAppService = abp.services.app.book;
 
     var l = abp.localization.getSource('LibrarySystemAdrienne'),
-        _$form = $('#UpdateForm');
+        _$formUpdate = $('#UpdateForm'),
+        _$formEdit = $('#EditForm');
 
     var BorrowerHomePage = "/Borrowers";
 
@@ -22,22 +23,29 @@
     }
     // #endregion
 
-
-    _$form.submit(function (CatchError)
+    // #region submit
+    _$formUpdate.submit(function (CatchError)
     {
         update();
         CatchError.preventDefault();
     });
 
-    // #region update() - To update data and return books
+    _$formEdit.submit(function (CatchError) {
+        edit();
+        CatchError.preventDefault();
+    });
+
+    // #endregion
+
+    // #region update() - To update return date 
     function update()
     {
         
-        if (!_$form.valid()) {
+        if (!_$formUpdate.valid()) {
             return;
         }
 
-        var borrower = _$form.serializeFormToObject();
+        var borrower = _$formUpdate.serializeFormToObject();
 
         if (borrower.Id != 0) {
 
@@ -46,10 +54,12 @@
             if (borrower.ReturnDate == borrower.ExpectedReturnDate) {
 
                 /*  Book returned on time  */
-                _borrowerAppService.update(borrower).done(function () {
+                _borrowerAppService.update(borrower).done(function (CatchError) {
                     _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
-                        alert("Nice! Book is returned on time.");
+                        abp.message.success('Nice! Book is returned on time.', 'Congratulations');
                         redirectToBorrowerIndex();
+                        CatchError.preventDefault();
+
                     });
                 });
             }
@@ -57,10 +67,12 @@
             {
                 /* Book returned earlier than expected date */
 
-                _borrowerAppService.update(borrower).done(function () {
+                _borrowerAppService.update(borrower).done(function (CatchError) {
                     _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
-                        alert("Yey! Book is returned early.");
+
+                        abp.message.success('Yey! Book is returned early.', 'Congratulations');
                         redirectToBorrowerIndex();
+                        CatchError.preventDefault();
                     });
                 });
 
@@ -69,10 +81,13 @@
             else if (borrower.ReturnDate > borrower.ExpectedReturnDate)
             {
                 /* Book returned late */
-                _borrowerAppService.update(borrower).done(function () {
+                _borrowerAppService.update(borrower).done(function CatchError() {
                     _bookAppService.updateStatusOfBooks({ Id: borrower.BookId, }).done(function () {
-                        alert("Book is not returned on time");
+
+                        abp.message.success('Book is not returned on time', 'Congratulations');
                         redirectToBorrowerIndex();
+                        CatchError.preventDefault();
+
                     });
                 });
           
@@ -81,15 +96,39 @@
             {
 
                 if (borrower.ReturnDate < borrower.BorrowDate) {
-                    /* Invalid input date */
-                    alert("Cannot return the book earlier than book borrowed date");
 
+                    /* Invalid input date */
+                    abp.message.error('Cannot return the book earlier than book borrowed date');
                 }
             }
 
         }
     }
     // #endregion
+
+    // #region edit() - To edit borrowers data
+    function edit() {
+
+        if (!_$formEdit.valid()) {
+            return;
+        }
+
+        var borrower = _$formEdit.serializeFormToObject();
+
+        if (borrower.Id != 0)
+        {
+            _borrowerAppService.update(borrower).done(function () {
+
+                _bookAppService.updateStatusOfBooksForEdit({ Id: borrower.BookId, }).done(function () {
+                    abp.message.success('Successfully Updated!', 'Congratulations');
+                    redirectToBorrowerIndex();
+                });
+            
+            });
+
+        }
+    }
+    // #endregion edit
 
     // #region Cancel Button
     $(document).on('click', '.cancel-button', function (e) {
@@ -109,8 +148,8 @@
     // #endregion
 
     // #region redirectToBorrowerIndex() - to redirect in borrowers home page
-    function redirectToBorrowerIndex() {
-        abp.notify.info(l('Success'), 'Message');
+    function redirectToBorrowerIndex(CatchError) {
+
         window.location.href = BorrowerHomePage;
 
     }

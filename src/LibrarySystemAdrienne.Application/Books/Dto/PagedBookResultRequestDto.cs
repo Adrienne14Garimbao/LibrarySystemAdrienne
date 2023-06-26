@@ -9,7 +9,7 @@ namespace LibrarySystemAdrienne.Books.Dto
 {
     public class PagedBookResultRequestDto : PagedResultRequestDto
     {
-        public string Keyword { get; set; }
+        public string SearchBook { get; set; }
         public bool? IsActive { get; set; }
     }
 }

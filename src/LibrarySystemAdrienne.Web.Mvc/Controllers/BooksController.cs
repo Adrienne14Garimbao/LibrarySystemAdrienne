@@ -31,8 +31,8 @@ namespace LibrarySystemAdrienne.Web.Controllers
         public async Task<IActionResult> Index(string searchBook)
         {
 
-            var book = await _bookIAppService.GetAllBookWithCategoryAndAuthor(new PagedBookResultRequestDto { MaxResultCount = int.MaxValue });
-
+            var book = await _bookIAppService.GetAllBookWithCategoryAndAuthor(new PagedBookResultRequestDto { MaxResultCount = int.MaxValue, SearchBook = searchBook });
+            
             var model = new BookListViewModel();
 
 

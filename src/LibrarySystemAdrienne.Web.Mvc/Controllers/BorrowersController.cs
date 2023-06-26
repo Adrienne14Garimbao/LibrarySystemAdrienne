@@ -71,7 +71,7 @@ namespace LibrarySystemAdrienne.Web.Controllers
         #endregion
 
 
-        #region Borrowers Update Page View
+        #region Borrowers Return Page View
         public async Task<IActionResult> UpdateBorrowers(int id)
         {
             var model = new CreateOrEditBorrowerViewModel();
@@ -101,6 +101,33 @@ namespace LibrarySystemAdrienne.Web.Controllers
         }
         #endregion
 
+        #region Borrowers Edit Page View
+        public async Task<IActionResult> EditBorrowers(int id)
+        {
+            var model = new CreateOrEditBorrowerViewModel();
+            var book = await _bookIAppService.GetAllBooksToBeBorrowed();
+            var student = await _studentIAppService.GetAllBorrowersStudent();
 
+            if (id != 0)
+            {
+                var borrowers = await _borrowerIAppService.GetBorrowerWithBook(id);
+                model = new CreateOrEditBorrowerViewModel()
+                {
+                    Id = borrowers.Id,
+                    BorrowDate = borrowers.BorrowDate,
+                    ExpectedReturnDate = borrowers.ExpectedReturnDate,
+                    BookId = borrowers.BookId,
+                    StudentId = borrowers.StudentId,
+                };
+
+                book.Add(borrowers.Book);
+            }
+
+            model.Books = book;
+            model.Students = student;
+
+            return View(model);
+        }
+        #endregion
     }
 }
