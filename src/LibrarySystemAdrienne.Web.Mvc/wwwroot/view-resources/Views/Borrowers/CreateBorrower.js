@@ -48,9 +48,11 @@
                             borrower.ReturnDate = null;
                             _bookAppService.updateStatusOfBooks({
                                 Id: borrower.BookId,
-                            }).done(function () {  
+                            }).done(function (CatchError) {  
 
-                                redirectToBorrowerIndex();       
+                                redirectToBorrowerIndex();
+                                abp.message.success('Successfully Saved!', 'Congratulations');
+                                CatchError.preventDefault();
 
                             });
                         });
@@ -80,11 +82,10 @@
     // #endregion
 
     // #region redirectToBorrowerIndex() - to redirect in borrowers home page
-    function redirectToBorrowerIndex(CatchError) {
+    function redirectToBorrowerIndex() {
         
         window.location.href = BorrowerHomePage;
-        abp.message.success('Successfully Saved!', 'Congratulations');
-        CatchError.preventDefault();
+        
     }
     // #endregion
 
